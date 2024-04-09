@@ -6,21 +6,23 @@ from pom.pages.home_page import HomeP
 from pom.pages.results_page import ResultsP
 
 
-# this would be a good place for configurations (throttle, cookies, auth, i/o)
-# apparently can also group tests by fixtures
-@pytest.fixture(params=['Pixel 7', 'iPhone 14 Pro Max', 'Samsung Galaxy S20 Ultra'])
-def devices(request) -> str:
+
+@pytest.fixture(name="devices", params=['Pixel 7', 'iPhone 14 Pro Max', 'Samsung Galaxy S20 Ultra'])
+def fixture_devices(request) -> str:
+    '''this would be a good place for configurations (throttle, cookies, auth, i/o)
+    apparently can also group tests by fixtures'''
     return request.param
 
 
-# these are only to demo use of merged fixtures and fixtures for fixtures
-@pytest.fixture(params=[0, 3])
-def perf_buffer(request) -> int:
+@pytest.fixture(name="perf_buffer", params=[0, 3])
+def fixture_perf_buffer(request) -> int:
+    '''these are only to demo use of merged fixtures and fixtures for fixtures
+    '''
     return request.param
 
 
-@pytest.fixture
-def default_user(devices):
+@pytest.fixture(name="default_user")
+def fixture_default_user(devices):
     '''Fixture for client configuration.'''
     mobile_emulation = {"deviceName": devices}
     chrome_options = webdriver.ChromeOptions()
