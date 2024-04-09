@@ -1,14 +1,9 @@
-from ast import Assert
-from time import sleep
+'''File to store tests.'''
 from selenium import webdriver
-from selenium.webdriver.chrome.webdriver import WebDriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import pytest
 
-from pom.pages.HomePage import HomeP
-from pom.pages.ResultsPage import ResultsP
+from pom.pages.home_page import HomeP
+from pom.pages.results_page import ResultsP
 
 
 # this would be a good place for configurations (throttle, cookies, auth, i/o)
@@ -26,6 +21,7 @@ def perf_buffer(request) -> int:
 
 @pytest.fixture
 def default_user(devices):
+    '''Fixture for client configuration.'''
     mobile_emulation = {"deviceName": devices}
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
@@ -36,6 +32,7 @@ def default_user(devices):
 
 
 def test_text_search(default_user, perf_buffer):
+    '''Test to search by text-only'''
     home_page = HomeP(default_user)
     home_page.main_nav.search_bar.send_keys('iPad')
     home_page.main_nav.search_button.click()
@@ -46,6 +43,7 @@ def test_text_search(default_user, perf_buffer):
 
 
 def test_categorical_search(default_user, perf_buffer):
+    '''Test to search by category'''
     home_page = HomeP(default_user)
     home_page.main_nav.expand_dropdown()
     home_page.main_nav.dropdown_options.desktops.click()
@@ -59,6 +57,7 @@ def test_categorical_search(default_user, perf_buffer):
 
 
 def test_text_categorical_search(default_user, perf_buffer):
+    '''Test to search by text AND category'''
     home_page = HomeP(default_user)
     home_page.main_nav.search_bar.send_keys('iPad')
     home_page.main_nav.expand_dropdown()
