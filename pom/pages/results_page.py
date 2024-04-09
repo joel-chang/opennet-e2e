@@ -1,7 +1,7 @@
-from pom.locators.Locators import ResultsPageLocators
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
+'''Results page.'''
 import sys
+from selenium.webdriver.support.select import Select
+from pom.locators.locators import ResultsPageLocators
 
 sys.path.append(sys.path[0] + "/....")
 # import os
@@ -9,7 +9,8 @@ sys.path.append(sys.path[0] + "/....")
 # sys.path.append(os.getcwd())
 
 
-class ResultsP(object):
+class ResultsP:
+    '''Results page.'''
     def __init__(self, driver):
         self.driver = driver
         self.category_dropdown = Select(driver.find_element(
