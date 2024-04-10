@@ -7,7 +7,6 @@ from pom.pages.home_page import HomeP
 from pom.pages.results_page import ResultsP
 
 
-
 @pytest.fixture(name="devices", params=['Pixel 7', 'iPhone 14 Pro Max', 'Samsung Galaxy S20 Ultra'])
 @allure.title('Choose devices for tests')
 def fixture_devices(request) -> str:
@@ -38,7 +37,10 @@ def fixture_default_user(devices):
     driver.get('https://ecommerce-playground.lambdatest.io/')
     yield driver
 
-@allure.title("From the home page, search by text only")
+
+@allure.parent_suite("E2E")
+@allure.suite("Home Page")
+@allure.title("Search by text only")
 @allure.description("This is a description for this test.")
 def test_text_search(default_user, perf_buffer):
     '''Test to search by text-only'''
@@ -51,7 +53,9 @@ def test_text_search(default_user, perf_buffer):
     default_user.quit()
 
 
-@allure.title("From the home page, search by category only")
+@allure.parent_suite("E2E")
+@allure.suite("Home Page")
+@allure.title("Search by category only")
 @allure.description("This is a description for this test.")
 def test_categorical_search(default_user, perf_buffer):
     '''Test to search by category'''
@@ -67,7 +71,9 @@ def test_categorical_search(default_user, perf_buffer):
     default_user.quit()
 
 
-@allure.title("From the home page, search by text and category")
+@allure.parent_suite("E2E")
+@allure.suite("Home Page")
+@allure.title("Search by text and category")
 @allure.description("This is a description for this test.")
 def test_text_categorical_search(default_user, perf_buffer):
     '''Test to search by text AND category'''
