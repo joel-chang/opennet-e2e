@@ -5,9 +5,9 @@ name: Python application
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "gh-pages" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "gh-pages" ]
 
 permissions:
   contents: read
