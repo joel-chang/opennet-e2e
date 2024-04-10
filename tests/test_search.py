@@ -9,6 +9,7 @@ from pom.pages.results_page import ResultsP
 
 
 @pytest.fixture(name="devices", params=['Pixel 7', 'iPhone 14 Pro Max', 'Samsung Galaxy S20 Ultra'])
+@allure.title('Choose devices for tests')
 def fixture_devices(request) -> str:
     '''this would be a good place for configurations (throttle, cookies, auth, i/o)
     apparently can also group tests by fixtures'''
@@ -16,6 +17,8 @@ def fixture_devices(request) -> str:
 
 
 @pytest.fixture(name="perf_buffer", params=[0, 3])
+@allure.title('Set fixed wait time')
+@allure.description('Not very good practice, sometimes useful.')
 def fixture_perf_buffer(request) -> int:
     '''these are only to demo use of merged fixtures and fixtures for fixtures
     '''
@@ -23,6 +26,8 @@ def fixture_perf_buffer(request) -> int:
 
 
 @pytest.fixture(name="default_user")
+@allure.title('Configure client to be used')
+@allure.description('This would be a good place to store session.')
 def fixture_default_user(devices):
     '''Fixture for client configuration.'''
     mobile_emulation = {"deviceName": devices}
