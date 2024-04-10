@@ -1,6 +1,7 @@
 '''File to store tests.'''
 from selenium import webdriver
 import pytest
+import allure
 
 from pom.pages.home_page import HomeP
 from pom.pages.results_page import ResultsP
@@ -32,7 +33,8 @@ def fixture_default_user(devices):
     driver.get('https://ecommerce-playground.lambdatest.io/')
     yield driver
 
-
+@allure.title("From the home page, search by text only")
+@allure.description("This is a description for this test.")
 def test_text_search(default_user, perf_buffer):
     '''Test to search by text-only'''
     home_page = HomeP(default_user)
@@ -44,6 +46,8 @@ def test_text_search(default_user, perf_buffer):
     default_user.quit()
 
 
+@allure.title("From the home page, search by category only")
+@allure.description("This is a description for this test.")
 def test_categorical_search(default_user, perf_buffer):
     '''Test to search by category'''
     home_page = HomeP(default_user)
@@ -58,6 +62,8 @@ def test_categorical_search(default_user, perf_buffer):
     default_user.quit()
 
 
+@allure.title("From the home page, search by text and category")
+@allure.description("This is a description for this test.")
 def test_text_categorical_search(default_user, perf_buffer):
     '''Test to search by text AND category'''
     home_page = HomeP(default_user)
